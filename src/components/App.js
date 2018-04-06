@@ -30,6 +30,15 @@ class App extends React.Component {
     });
   }
 
+  componentWillMount() {
+    this.fetchTweets()
+    this.startInterval()
+  }
+
+  componentWillUnmount() {
+    this.cleanUpInterval()
+  }
+
   render() {
     return (
       <div>

@@ -13,12 +13,23 @@ class App extends React.Component {
     };
   }
 
-  // TODO: componentWillMount()
-  // TODO: componentDidMount()
-  // TODO: componentWillUnmount()
+  componentWillMount = () => {
+    this.fetchTweets()
+  }
+
+  componentDidMount = () => {
+    this.startInterval()
+  }
+
+  componentWillUnmount = () => {
+    this.cleanUpInterval()
+  }
 
   startInterval = () => {
-    this.interval = setInterval(this.fetchTweets, 2000);
+    this.interval = setInterval(() =>{
+      console.log('hi');
+      this.fetchTweets()
+    }, 2000);
   }
 
   cleanUpInterval = () => clearInterval(this.interval);
@@ -27,7 +38,7 @@ class App extends React.Component {
     const newTweets = getTweets();
     this.setState({
       latestTweets: newTweets
-    });
+    }, () => console.log(this.state.latestTweets));
   }
 
   render() {
